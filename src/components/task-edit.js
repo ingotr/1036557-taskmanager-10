@@ -8,7 +8,7 @@ const createColorsMarkup = (colors, currentColor) => {
         `<input
           type="radio"
           id="color-${color}-4"
-          class="card__color-input card__color-input--${color} visually-hidden"
+          class="card__color-input cnpm ard__color-input--${color} visually-hidden"
           name="color"
           value="${color}"
           ${currentColor === color ? `checked` : ``}
