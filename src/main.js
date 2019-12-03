@@ -6,14 +6,11 @@ import {createBoardTemplate} from './components/board.js';
 import {createTaskEditTemplate} from './components/task-edit.js';
 import {createTaskTemplate} from './components/task';
 import {createLoadMoreButtonTemplate} from './components/showMoreButton.js';
+import {render} from './utils.js';
 
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
-
-const render = (container, template, place = `beforeEnd`) => {
-  container.insertAdjacentHTML(place, template);
-};
 
 const mainElement = document.querySelector(`.main`);
 const headerElement = mainElement.querySelector(`.main__control`);
