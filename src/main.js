@@ -9,7 +9,7 @@ import ShowMoreButtonComponent from './components/showMoreButton.js';
 import SortComponent from './components/sort.js';
 import {generateTasks} from './mock/task.js';
 import {generateFilters} from './mock/filter.js';
-import {render, RenderPosition} from './utils.js';
+import {render, remove, replace, RenderPosition} from './utils/render.js';
 
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -18,13 +18,13 @@ const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 const mainElement = document.querySelector(`.main`);
 const headerElement = mainElement.querySelector(`.main__control`);
 
-render(headerElement, new MainMenuComponent().getElement(), RenderPosition.BEFOREEND);
+render(headerElement, new MainMenuComponent(), RenderPosition.BEFOREEND);
 
 const filters = generateFilters();
-render(mainElement, new FilterComponent(filters).getElement(), RenderPosition.BEFOREEND);
+render(mainElement, new FilterComponent(filters), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardComponent();
-render(mainElement, boardComponent.getElement(), RenderPosition.BEFOREEND);
+render(mainElement, boardComponent, RenderPosition.BEFOREEND);
 
 const renderTask = (taskListElement, task) => {
   const onEscKeyDown = (evt) => {
@@ -37,36 +37,34 @@ const renderTask = (taskListElement, task) => {
   };
 
   const replaceEditToTask = () => {
-    taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+    replace(taskComponent, taskEditComponent);
   };
 
   const replaceTaskToEdit = () => {
-    taskListElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
+    replace(taskComponent, taskEditComponent);
   };
 
   const taskComponent = new TaskComponent(task);
 
-  const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
-  editButton.addEventListener(`click`, () => {
+  taskComponent.setEditButtonClickHandler(() => {
     replaceTaskToEdit();
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
   const taskEditComponent = new TaskEditComponent(task);
-  const editForm = taskEditComponent.getElement().querySelector(`form`);
-  editForm.addEventListener(`submit`, replaceEditToTask);
+  taskEditComponent.setSubmitHandler(replaceEditToTask);
 
-  render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
+  render(taskListElement, taskComponent, RenderPosition.BEFOREEND);
 };
 
 const tasks = generateTasks(TASK_COUNT);
 const isAllTasksArchived = tasks.every((task) => task.isArchive);
 
 if (isAllTasksArchived) {
-  render(boardComponent.getElement(), new NoTasksComponent().getElement(), RenderPosition.BEFOREEND);
+  render(boardComponent.getElement(), new NoTasksComponent(), RenderPosition.BEFOREEND);
 } else {
-  render(boardComponent.getElement(), new SortComponent().getElement(), RenderPosition.BEFOREEND);
-  render(boardComponent.getElement(), new TasksComponent().getElement(), RenderPosition.BEFOREEND);
+  render(boardComponent.getElement(), new SortComponent(), RenderPosition.BEFOREEND);
+  render(boardComponent.getElement(), new TasksComponent(), RenderPosition.BEFOREEND);
 
   const taskListElement = boardComponent.getElement().querySelector(`.board__tasks`);
 
@@ -77,9 +75,9 @@ if (isAllTasksArchived) {
     });
 
   const showMoreButtonComponent = new ShowMoreButtonComponent();
-  render(boardComponent.getElement(), showMoreButtonComponent.getElement(), RenderPosition.BEFOREEND);
+  render(boardComponent.getElement(), showMoreButtonComponent, RenderPosition.BEFOREEND);
 
-  showMoreButtonComponent.getElement().addEventListener(`click`, () => {
+  showMoreButtonComponent.setClickHandler(() => {
     const prevTaskCount = showingTasksCount;
     showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
 
@@ -87,8 +85,7 @@ if (isAllTasksArchived) {
       .forEach((task) => renderTask(taskListElement, task));
 
     if (showingTasksCount >= tasks.length) {
-      showMoreButtonComponent.getElement().remove();
-      showMoreButtonComponent.removeElement();
+      remove(showMoreButtonComponent);
     }
   });
 }

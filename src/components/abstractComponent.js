@@ -1,4 +1,4 @@
-import {createElement} from '../utils.js';
+import {createElement} from '../utils/render.js';
 
 export default class AbstractComponent {
   constructor() {
@@ -11,6 +11,11 @@ export default class AbstractComponent {
 
   getTemplate() {
     throw new Error(`Abstract method not implemented: getTemplate`);
+  }
+
+  setSubmitHandler(handler) {
+    this.getElement().querySelectro(`form`)
+      .addEventListener(`submit`, handler);
   }
 
   getElement() {
