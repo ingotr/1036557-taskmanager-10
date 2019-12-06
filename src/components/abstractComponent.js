@@ -1,4 +1,4 @@
-import {createElement} from '../utils/render.js';
+import {createElement} from '../components/utils/render.js';
 
 export default class AbstractComponent {
   constructor() {
@@ -14,13 +14,13 @@ export default class AbstractComponent {
   }
 
   setSubmitHandler(handler) {
-    this.getElement().querySelectro(`form`)
+    this.getElement().querySelector(`form`)
       .addEventListener(`submit`, handler);
   }
 
   getElement() {
     if (!this._element) {
-      this._element = createElement(this.getTemplate);
+      this._element = createElement(this.getTemplate());
     }
 
     return this._element;

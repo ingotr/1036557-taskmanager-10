@@ -1,6 +1,6 @@
 import AbstractComponent from './abstractComponent.js';
 import {MonthNames} from '../const.js';
-import {formatTime} from '../utils/common.js';
+import {formatTime} from '../components/utils/common.js';
 
 const createHashtagsMarkup = (hashtags) => {
   return hashtags
