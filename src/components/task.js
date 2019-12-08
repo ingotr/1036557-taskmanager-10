@@ -1,5 +1,5 @@
 import AbstractComponent from './abstractComponent.js';
-import {MonthNames} from '../const.js';
+import {MONTH_NAMES} from '../const.js';
 import {formatTime} from '../components/utils/common.js';
 
 const createHashtagsMarkup = (hashtags) => {
@@ -22,7 +22,7 @@ const createTaskTemplate = (task) => {
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
 
-  const date = isDateShowing ? `${dueDate.getDate()} ${MonthNames[dueDate.getMonth()]}` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? formatTime(dueDate) : ``;
 
   const hashTags = createHashtagsMarkup(Array.from(tags));
