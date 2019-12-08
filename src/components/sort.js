@@ -8,11 +8,11 @@ export const SortType = {
 
 const createSortTemplate = () => {
   return (
-    `div class="board__filter-list">
-      <a href="#" data-sort-type="${SortType.DEFAUILT}" class="board__filter">SORT BY DEFAULT</a>
+    `<div class="board__filter-list">
+      <a href="#" data-sort-type="${SortType.DEFAULT}" class="board__filter">SORT BY DEFAULT</a>
       <a href="#" data-sort-type="${SortType.DATE_UP}" class="board__filter">SORT BY DATE up</a>
-      <a href="#" data-sort-type="${SortType.DEFAULT}" class="board__filter">SORT BY DATE down</a>
-    <div class="board__tasks"></div>`
+      <a href="#" data-sort-type="${SortType.DATE_DOWN}" class="board__filter">SORT BY DATE down</a>
+    </div>`
   );
 };
 
