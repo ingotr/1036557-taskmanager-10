@@ -1,7 +1,7 @@
 import TasksComponent from '../tasks.js';
 import SortComponent, {SortType} from '../sort.js';
 import NoTaskComponent from '../no-tasks.js';
-import TaskControllerComponent from './taskController.js';
+import TaskController from './task.js';
 import {render, remove, RenderPosition} from '../utils/render.js';
 import ShowMoreButton from '../showMoreButton.js';
 
@@ -9,6 +9,14 @@ const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
+
+const renderTasks = (taskListElement, tasks, onDataChange) => {
+  return tasks.map((task) => {
+    const taskController = new TaskController(taskListElement, onDataChange);
+    taskController.render(task);
+    return taskController;
+  });
+};
 
 export default class BoardController {
   constructor(container) {
@@ -18,7 +26,6 @@ export default class BoardController {
     this._sortComponent = new SortComponent();
     this._tasksComponent = new TasksComponent();
     this._showMoreButtonComponent = new ShowMoreButton();
-    this._taskControllerComponent = new TaskControllerComponent(this._tasksComponent.getElement());
   }
 
   render(tasks) {
@@ -34,12 +41,6 @@ export default class BoardController {
     render(container, this._tasksComponent, RenderPosition.BEFOREEND);
 
     const taskListElement = this._tasksComponent.getElement();
-
-    const renderTasks = (data) => {
-      data.forEach((task) => {
-        this._taskControllerComponent.render(task);
-      });
-    };
 
     const renderShowMoreButton = () => {
       if (showingTasksCount >= tasks.length) {
