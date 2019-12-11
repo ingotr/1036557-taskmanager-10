@@ -3,8 +3,9 @@ import TaskEditComponent from '../taskEdit.js';
 import {render, replace, RenderPosition} from '../utils/render.js';
 
 export default class TaskController {
-  constructor(container) {
+  constructor(container, onDataChange) {
     this._container = container;
+    this._onDataChange = onDataChange;
   }
 
   render(task) {
