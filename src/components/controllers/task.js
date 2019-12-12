@@ -8,9 +8,12 @@ const Mode = {
 };
 
 export default class TaskController {
-  constructor(container, onDataChange) {
+  constructor(container, onDataChange, onViewChange) {
     this._container = container;
     this._onDataChange = onDataChange;
+    this._onViewChange = onViewChange;
+
+    this._mode = Mode.DEFAULT;
 
     this._taskComponent = null;
     this._taskEditComponent = null;
@@ -26,7 +29,7 @@ export default class TaskController {
     this._taskEditComponent = new TaskEditComponent(task);
 
     this._taskComponent.setEditButtonClickHandler(() => {
-      this._replaceEditToTask();
+      this._replaceTaskToEdit();
       document.addEventListener(`keydown`, this._onEscKeyDown);
     });
 
@@ -80,9 +83,4 @@ export default class TaskController {
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
   }
-
-  // const editButtonHandler = () => {
-  //   replaceTaskToEdit();
-  //   document.addEventListener(`keydown`, onEscKeyDown);
-  // };
 }

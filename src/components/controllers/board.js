@@ -10,9 +10,9 @@ const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
-const renderTasks = (taskListElement, tasks, onDataChange) => {
+const renderTasks = (taskListElement, tasks, onDataChange, onViewChange) => {
   return tasks.map((task) => {
-    const taskController = new TaskController(taskListElement, onDataChange);
+    const taskController = new TaskController(taskListElement, onDataChange, onViewChange);
     taskController.render(task);
     return taskController;
   });
@@ -30,6 +30,7 @@ export default class BoardController {
     this._showMoreButtonComponent = new ShowMoreButton();
     this._onDataChange = this._onDataChange.bind(this);
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
+    this._onViewChange = this._onViewChange.bind(this);
 
     this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
@@ -50,7 +51,7 @@ export default class BoardController {
     const taskListElement = this._tasksComponent.getElement();
 
     const newTasks = renderTasks(taskListElement, this._tasks.slice(0, showingTasksCount),
-        this._onDataChange);
+        this._onDataChange, this._onViewChange);
     this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
 
     this._renderShowMoreButton();
