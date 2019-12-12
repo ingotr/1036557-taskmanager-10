@@ -8,10 +8,11 @@ const Mode = {
 };
 
 export default class TaskController {
-  constructor(container, onDataChange, onViewChange) {
+  constructor(container, onDataChange, onViewChange, onFiltersChange) {
     this._container = container;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
+    this._onFiltersChange = onFiltersChange;
 
     this._mode = Mode.DEFAULT;
 
@@ -37,12 +38,22 @@ export default class TaskController {
       this._onDataChange(this, task, Object.assign({}, task, {
         isArchive: !task.isArchive,
       }));
+      if (task.isArchive) {
+        this._onFiltersChange(`archive`, true);
+      } else {
+        this._onFiltersChange(`archive`, false);
+      }
     });
 
     this._taskComponent.setFavoritesButtonClickHandler(() => {
       this._onDataChange(this, task, Object.assign({}, task, {
         isFavorite: !task.isFavorite
       }));
+      if (task.isFavorite) {
+        this._onFiltersChange(`favorites`, true);
+      } else {
+        this._onFiltersChange(`favorites`, false);
+      }
     });
 
     this._taskEditComponent.setSubmitHandler(() => this._replaceEditToTask());
