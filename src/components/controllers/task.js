@@ -15,7 +15,7 @@ export default class TaskController {
         replaceEditToTask();
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
-    };
+    }
 
     const replaceEditToTask = () => {
       replace(taskComponent, taskEditComponent);
@@ -36,5 +36,11 @@ export default class TaskController {
     const taskEditComponent = new TaskEditComponent(task);
     taskEditComponent.setSubmitHandler(replaceEditToTask);
     render(this._container, taskComponent, RenderPosition.BEFOREEND);
+  }
+
+  setDefaultView() {
+    if (this._mode !== Mode.DEFAULT) {
+      this._replaceEditToTask();
+    }
   }
 }
