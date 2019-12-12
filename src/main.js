@@ -14,6 +14,7 @@ const headerElement = mainElement.querySelector(`.main__control`);
 render(headerElement, new MainMenuComponent(), RenderPosition.BEFOREEND);
 
 const filters = generateFilters();
+
 render(mainElement, new FilterComponent(filters), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardComponent();
@@ -23,5 +24,5 @@ const tasks = generateTasks(TASK_COUNT);
 
 const boardController = new BoardController(boardComponent);
 
-boardController.render(tasks);
+boardController.render(tasks, filters);
 
