@@ -1,5 +1,5 @@
 import AbstractSmartComponent from './abstractSmartComponent.js';
-import flatpickr from 'flatpickr.js';
+import flatpickr from '../../node_modules/flatpickr';
 import {COLORS, DAYS, MONTH_NAMES} from '../const.js';
 import {formatTime} from '../components/utils/common.js';
 
@@ -208,6 +208,8 @@ export default class TaskEdit extends AbstractSmartComponent {
 
   rerender() {
     super.rerender();
+
+    this._applyFlatpickr();
   }
 
   reset() {
