@@ -12,6 +12,7 @@
   "devDependencies": {
     "eslint": "6.1.0",
     "eslint-config-htmlacademy": "0.5.2",
+    "flatpickr": "4.6.3",
     "webpack": "4.41.2",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0"
