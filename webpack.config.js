@@ -18,5 +18,13 @@ module.exports = {
     publicPath: `http:/localhost:8080/`,
     compress: true,
     open: true,
-  }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [`style-loader`, `css-loader`],
+      },
+    ],
+  },
 };
