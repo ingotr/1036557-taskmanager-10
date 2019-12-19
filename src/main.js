@@ -25,7 +25,7 @@ const tasks = generateTasks(TASK_COUNT);
 const tasksModel = new TasksModel();
 tasksModel.setTasks(tasks);
 
-const boardController = new BoardController(boardComponent);
+const boardController = new BoardController(boardComponent, tasksModel);
 
-boardController.render(tasks, filters);
+boardController.render(filters);
 
