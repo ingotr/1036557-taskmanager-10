@@ -32,9 +32,10 @@ export default class BoardController {
     this._onDataChange = this._onDataChange.bind(this);
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
-    this._onFiltersChange = this._onFiltersChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
 
     this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
+    this._tasksModel.setFilterChangeHandler(this._onFilterChange);
   }
 
   render(filters) {
@@ -82,6 +83,12 @@ export default class BoardController {
         remove(this._showMoreButtonComponent);
       }
     });
+  }
+
+  _onFilterChange() {
+    this._removeTasks();
+    this._renderTasks(this._tasksModel.getTasks().slice(0, SHOWING_TASKS_COUNT_ON_START));
+    this._renderLoadMoreButton();
   }
 
   _onFiltersChange(filterType, filterChanged) {
