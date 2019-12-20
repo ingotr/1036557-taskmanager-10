@@ -1,5 +1,6 @@
 import AbstractComponent from './abstractComponent.js';
 import {formatTime, formatDate} from '../components/utils/common.js';
+import {isOverdueDate} from '../utils/common.js';
 
 const createHashtagsMarkup = (hashtags) => {
   return hashtags
@@ -29,7 +30,7 @@ const createButtonMarkup = (name, isActive) => {
 const createTaskTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
 
-  const isExpired = dueDate instanceof Date && dueDate < Date.now();
+  const isExpired = dueDate instanceof Date && isOverdueDate(dueDate, new Date());
   const isDateShowing = Boolean(dueDate);
 
   const date = isDateShowing ? formatDate(dueDate) : ``;
