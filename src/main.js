@@ -2,10 +2,10 @@ import MainMenuComponent from './components/mainMenu.js';
 import BoardComponent from './components/board.js';
 import FilterComponent from './components/filter.js';
 import TasksModel from './models/tasks.js';
-import BoardController from './components/controllers/board.js';
+import BoardController from './controllers/board.js.js';
 import {generateTasks} from './mock/task.js';
 import {generateFilters} from './mock/filter.js';
-import {render, RenderPosition} from './components/utils/render.js';
+import {render, RenderPosition} from './utils/render.js';
 
 const TASK_COUNT = 22;
 

@@ -1,9 +1,9 @@
-import TasksComponent from '../tasks.js';
-import SortComponent, {SortType} from '../sort.js';
-import NoTaskComponent from '../no-tasks.js';
-import TaskController from './task.js';
-import {render, renderFilter, remove, RenderPosition} from '../utils/render.js';
-import ShowMoreButton from '../showMoreButton.js';
+import TasksComponent from '../components/tasks.js';
+import SortComponent, {SortType} from '../components/sort.js';
+import NoTaskComponent from '../components/no-tasks.js';
+import TaskController from './task.js.js';
+import {render, renderFilter, remove, RenderPosition} from '../components/utils/render.js';
+import ShowMoreButton from '../components/showMoreButton.js';
 
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;

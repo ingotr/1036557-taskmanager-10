@@ -1,6 +1,6 @@
-import TaskComponent from '../task.js';
-import TaskEditComponent from '../taskEdit.js';
-import {render, replace, RenderPosition} from '../utils/render.js';
+import TaskComponent from '../components/task.js';
+import TaskEditComponent from '../components/taskEdit.js';
+import {render, replace, RenderPosition} from '../components/utils/render.js';
 
 const Mode = {
   DEFAULT: `default`,
