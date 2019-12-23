@@ -85,7 +85,7 @@ export default class TaskController {
     this._taskEditComponent.setDeleteButtonClickHandler(() => this._onDataChange(this, task, null));
   }
 
-  swtich (mode) {
+  switch (mode) {
     case Mode.DEFAULT:
       if (oldTaskEditComponent && oldTaskComponent) {
         replace(this._taskComponent, oldTaskComponent);
