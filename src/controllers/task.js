@@ -1,6 +1,6 @@
 import TaskComponent from '../components/task.js';
 import TaskEditComponent from '../components/taskEdit.js';
-import {render, replace, RenderPosition} from '../components/utils/render.js';
+import {render, remove, replace, RenderPosition} from '../components/utils/render.js';
 import {COLOR} from '../const.js';
 
 export const Mode = {
@@ -83,26 +83,26 @@ export default class TaskController {
       this._onDataChange(this, task, data);
     });
     this._taskEditComponent.setDeleteButtonClickHandler(() => this._onDataChange(this, task, null));
-  }
 
-  switch (mode) {
-    case Mode.DEFAULT:
-      if (oldTaskEditComponent && oldTaskComponent) {
-        replace(this._taskComponent, oldTaskComponent);
-        replace(this._taskEditComponent, oldTaskEditComponent);
-        this._replaceEditToTask();
-      } else {
-        render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
-      }
-      break;
-    case Mode.ADDING:
-      if (oldTaskEditComponent && oldTaskComponent) {
-        remove(oldTaskComponent);
-        remove(oldTaskEditComponent);
-      }
-      document.addEventListener(`keydown`, this._onEscKeyDown);
-      render(this._container, this._taskEditComponent, RenderPosition.AFTERBEGIN);
-      break;
+    switch (mode) {
+      case Mode.DEFAULT:
+        if (oldTaskEditComponent && oldTaskComponent) {
+          replace(this._taskComponent, oldTaskComponent);
+          replace(this._taskEditComponent, oldTaskEditComponent);
+          this._replaceEditToTask();
+        } else {
+          render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
+        }
+        break;
+      case Mode.ADDING:
+        if (oldTaskEditComponent && oldTaskComponent) {
+          remove(oldTaskComponent);
+          remove(oldTaskEditComponent);
+        }
+        document.addEventListener(`keydown`, this._onEscKeyDown);
+        render(this._container, this._taskEditComponent, RenderPosition.AFTERBEGIN);
+        break;
+    }
   }
 
   setDefaultView() {
