@@ -2,7 +2,7 @@ import TasksComponent from '../components/tasks.js';
 import SortComponent, {SortType} from '../components/sort.js';
 import NoTaskComponent from '../components/no-tasks.js';
 import TaskController, {Mode as TaskControllerMode, EmptyTask} from './task.js';
-import {render, renderFilter, remove, RenderPosition} from '../components/utils/render.js';
+import {render, renderFilter, remove, RenderPosition} from '../utils/render.js';
 import ShowMoreButton from '../components/showMoreButton.js';
 
 const SHOWING_TASKS_COUNT_ON_START = 8;

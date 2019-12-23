@@ -1,7 +1,8 @@
 import AbstractSmartComponent from './abstractSmartComponent.js';
 import flatpickr from '../../node_modules/flatpickr';
+import he from '../../node_modules/he';
 import {COLORS, DAYS} from '../const.js';
-import {formatTime, formatDate, isRepeating, isOverdueDate} from '../components/utils/common.js';
+import {formatTime, formatDate, isRepeating, isOverdueDate} from '../utils/common.js';
 
 const MIN_DESCRIPTION_LENGTH = 1;
 const MAX_DESCRIPTION_LEGNTH = 140;
@@ -84,7 +85,7 @@ const createTaskEditTemplate = (task, options = {}) => {
   const {isDateShowing, isRepeatingTask, activeRepeatingDays,
     currentDescription} = options;
 
-  const description = window.he.encode(currentDescription);
+  const description = he.encode(currentDescription);
 
   const isExpired = dueDate instanceof Date && isOverdueDate(dueDate, new Date());
   const isBlockSaveButton = (isDateShowing && isRepeatingTask) ||

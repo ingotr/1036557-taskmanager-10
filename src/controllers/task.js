@@ -1,6 +1,6 @@
 import TaskComponent from '../components/task.js';
 import TaskEditComponent from '../components/taskEdit.js';
-import {render, remove, replace, RenderPosition} from '../components/utils/render.js';
+import {render, remove, replace, RenderPosition} from '../utils/render.js';
 import {COLOR} from '../const.js';
 
 export const Mode = {
