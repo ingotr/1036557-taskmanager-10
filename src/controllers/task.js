@@ -56,10 +56,7 @@ export default class TaskController {
       }
     });
 
-    this._taskEditComponent.setSubmitHandler((evt) => {
-      evt.preventDefault();
-      this._replaceEditToTask();
-    });
+    this._taskEditComponent.setSubmitHandler(() => this._replaceEditToTask());
 
     if (oldTaskEditComponent && oldTaskComponent) {
       replace(this._taskComponent, oldTaskComponent);
